@@ -7,7 +7,7 @@ import Animated, { FadeInUp, FadeOutUp } from 'react-native-reanimated';
 
 import { Row } from '../../../containers/row/row';
 import { APP_COLORS } from '../../constants/app-colors';
-import { $flashApi, $flashMessage } from '../../models/flash-message';
+import { $flashApi, $flashMessage } from '../../models/flash-message-model.ts';
 import { Icon } from '../icon/icon';
 import styled from 'styled-components/native';
 

@@ -11,9 +11,9 @@ const Wrapper = styled.View`
 `;
 
 export const News = () => {
-  const { isLoading, queries: newsList } = useNews();
+  const { isLoading, isError, data, error } = useNews();
 
-  console.log(newsList);
+  console.log(data);
 
   return (
     <Wrapper>

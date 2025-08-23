@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 
 import { API_TIMEOUT, API_URL } from '../constants/api';
-import { $flashApi } from '../models/flash-message';
+import { $flashApi } from '../models/flash-message-model.ts';
 import { ApiRequestParams } from '../types/api';
 
 export const apiRequest = async ({ ...options }: ApiRequestParams) => {
@@ -13,6 +13,8 @@ export const apiRequest = async ({ ...options }: ApiRequestParams) => {
       headers,
       ...options,
     });
+
+    console.blog({ ...options });
     return res.data;
   } catch (_error) {
     const { response, message } = _error as AxiosError;

@@ -1,0 +1,15 @@
+export const APP_COLORS = {
+  white: '#ffffff',
+  black: '#000',
+  dark_grey: '#323232',
+  smoke: '#1E1E1E',
+  light_text: '#A3A4A4',
+  light_grey: '#D5BFB4',
+  blue: '#1a73e8',
+  green: '#0BB57B',
+  blue_grey: '#505050',
+  card: 'rgba(30,30,30,0.5)',
+  very_dark: '#191C1B',
+  red: '#C33',
+  grey: '#AEAEB2',
+};

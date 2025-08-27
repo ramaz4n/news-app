@@ -3,9 +3,10 @@ import { APP_COLORS } from '../../shared/constants/app-colors.ts';
 import { FILTERS } from '../../shared/constants/filters.ts';
 
 const Wrapper = styled.View`
+  margin-top: 10px;
   height: 40px;
   width: 100%;
-  background-color: ${APP_COLORS.light_grey};
+  background-color: ${APP_COLORS.black};
   justify-content: center;
   gap: 20px;
   flex-direction: row;
@@ -21,8 +22,8 @@ const StyledTouchableOpacity = styled.TouchableOpacity`
 `;
 
 const StyledText = styled.Text`
-  font-size: 16px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 700;
   color: ${APP_COLORS.white};
 `;
 

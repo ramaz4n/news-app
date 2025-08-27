@@ -5,18 +5,10 @@ export type ApiRequestParams = AxiosRequestConfig & {
   appLoading?: boolean;
 };
 
-export type FetchResponse<T> = Promise<ApiResponse<T>>;
+export type FetchResponse<T> = Promise<ApiResponse>;
 
-export type FetchPaginationResponse<T> = Promise<ApiPaginationResponse<T>>;
-
-export interface ApiResponse<T> {
+export interface ApiResponse {
   articles: News[];
   totalResults: boolean;
   status: string;
 }
-
-export type ApiPaginationResponse<Model> = ApiResponse<{
-  countRecord: number;
-  lastPage: number;
-  models: Model;
-}>;

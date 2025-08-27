@@ -29,7 +29,7 @@ const Wrapper = styled.View`
 `;
 
 const MessageText = styled.Text`
-  color: ${APP_COLORS.black};
+  color: ${APP_COLORS.red};
   font-size: 14px;
 `;
 

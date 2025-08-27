@@ -17,10 +17,3 @@ export interface News {
   publishedAt: string;
   content: string;
 }
-
-export interface NewsList {
-  id: string;
-  locale: string;
-  phone_code: string;
-  title: string;
-}

@@ -14,17 +14,26 @@ export const apiRequest = async ({ ...options }: ApiRequestParams) => {
       ...options,
     });
 
-    console.blog({ ...options });
+    console.blog(options);
     return res.data;
   } catch (_error) {
     const { response, message } = _error as AxiosError;
+
+    console.log(response);
+
+    if (response?.data?.status === 'error') {
+      $flashApi.show({
+        message: response.data.message ? 'Ошибка: ' + response.data.message : 'Error unknown',
+        duration: 15_000,
+      });
+
+      return;
+    }
+
     if (message === 'Network Error') {
       $flashApi.show({ message: 'Проверьте подключение к интеренету', duration: 15_000 });
 
       return;
-    }
-    if (response?.status === 401) {
-      console.log(response);
     }
   }
 };

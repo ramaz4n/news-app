@@ -3,6 +3,8 @@ import { QueryKeys } from '../types/api/query-keys.ts';
 import { fetchNews } from '../api/news.ts';
 import { useUnit } from 'effector-react';
 import { $newsFilter } from '../models/news-filter-model.ts';
+import { useEffect } from 'react';
+import { $newsList, setNewsList } from '../models/news-model.ts';
 
 export const useNews = () => {
   const params = useUnit($newsFilter);
@@ -22,6 +24,17 @@ export const useNews = () => {
   });
 
   const { isLoading, isError, data, error } = queries[0];
+
+  useEffect(() => {
+    console.log(queries[0]);
+
+    if (data?.articles) {
+      const currentNews = $newsList.getState();
+      const updatedNews = params.page === 1 ? data.articles : [...currentNews, ...data.articles];
+
+      setNewsList(updatedNews);
+    }
+  }, [data]);
 
   return {
     isLoading,

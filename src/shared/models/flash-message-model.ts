@@ -1,9 +1,8 @@
 import { createApi, createStore } from 'effector';
 
-
 export interface FlashApiParams {
   message: string;
-  duration?: number; //ms
+  duration?: number;
 }
 
 export const $flashMessage = createStore<FlashApiParams | null>(null);

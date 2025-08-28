@@ -1,16 +1,9 @@
 import { createEvent, createStore } from 'effector';
 import { NewsFilterParams } from '../api/news.ts';
-import { getFormattedDate } from '../utils/get-date.ts';
+import { defaultSearchFilters } from '../constants/default-search-filters.ts';
 
 export const setNewsFilter = createEvent<Partial<NewsFilterParams>>();
 
-export const $newsFilter = createStore<NewsFilterParams>({
-  q: 'kazan',
-  from: '2025-08-20',
-  to: getFormattedDate(),
-  sortBy: 'popularity',
-  pageSize: 11,
-  page: 1,
-});
+export const $newsFilter = createStore<NewsFilterParams>(defaultSearchFilters);
 
 $newsFilter.on(setNewsFilter, (state, payload) => ({ ...state, ...payload }));

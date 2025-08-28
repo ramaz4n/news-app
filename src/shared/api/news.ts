@@ -99,6 +99,6 @@ export type NewsFilterParams = {
 };
 
 export const fetchNews = {
-  news_list: (params: NewsFilterParams): FetchNewsList['res'] =>
-    apiRequest({ url: '/everything', params: { ...params, apiKey: API_KEY } }),
+  news_list: (queryType: string, params: NewsFilterParams): FetchNewsList['res'] =>
+    apiRequest({ url: queryType, params: { ...params, apiKey: API_KEY } }),
 };

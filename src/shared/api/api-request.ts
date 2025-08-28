@@ -14,7 +14,6 @@ export const apiRequest = async ({ ...options }: ApiRequestParams) => {
       ...options,
     });
 
-    console.blog(options);
     return res.data;
   } catch (_error) {
     const { response, message } = _error as AxiosError;
@@ -23,7 +22,7 @@ export const apiRequest = async ({ ...options }: ApiRequestParams) => {
 
     if (response?.data?.status === 'error') {
       $flashApi.show({
-        message: response.data.message ? 'Ошибка: ' + response.data.message : 'Error unknown',
+        message: response.data.message ? 'Ошибка: ' + response.data.message : 'Unknown error',
         duration: 15_000,
       });
 

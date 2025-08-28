@@ -1,11 +1,12 @@
 import styled from 'styled-components/native';
 import { APP_COLORS } from '../../shared/constants/app-colors.ts';
-import { FILTERS } from '../../shared/constants/filters.ts';
+import { CategoryFilterType, FILTERS } from '../../shared/constants/filters.ts';
+import { WINDOW } from '../../shared/constants/global.ts';
+import { setQueryType } from '../../shared/models/news-model.ts';
+import { setNewsFilter } from '../../shared/models/news-filter-model.ts';
 
 const Wrapper = styled.View`
-  margin-top: 10px;
-  height: 40px;
-  width: 100%;
+  width: ${WINDOW.width};
   background-color: ${APP_COLORS.black};
   justify-content: center;
   gap: 20px;
@@ -17,7 +18,7 @@ const StyledTouchableOpacity = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background-color: ${APP_COLORS.blue};
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 5px 10px;
 `;
 
@@ -28,10 +29,15 @@ const StyledText = styled.Text`
 `;
 
 export const Filters = () => {
+  const onFilterClick = (filter: CategoryFilterType) => {
+    setQueryType(filter.queryType);
+    setNewsFilter({ country: 'ru', category: filter.name, page: 1 });
+  };
+
   return (
     <Wrapper>
       {FILTERS.map((filter) => (
-        <StyledTouchableOpacity key={filter.name}>
+        <StyledTouchableOpacity key={filter.name} onPress={() => onFilterClick(filter)}>
           <StyledText>{filter.name}</StyledText>
         </StyledTouchableOpacity>
       ))}

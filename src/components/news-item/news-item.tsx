@@ -1,8 +1,12 @@
 import styled from 'styled-components/native';
 import { APP_COLORS } from '../../shared/constants/app-colors.ts';
 import { WINDOW } from '../../shared/constants/global.ts';
+import { News } from '../../shared/types/api/news.ts';
+import { useUnit } from 'effector-react';
+import { setNews } from '../../shared/models/news-model.ts';
+import { Navigation } from '../../shared/utils/navigation.ts';
 
-const Wrapper = styled.View`
+const PressableWrapper = styled.Pressable`
   margin-top: 15px;
   border-radius: 20px;
   width: ${WINDOW.width};
@@ -35,25 +39,27 @@ const NewsItemFooter = styled.View`
   justify-content: space-between;
 `;
 
-type NewsItemProps = {
-  title: string;
-  urlToImage: string;
-  sourceName: string;
-  publishedAt: string;
-};
+export const NewsItem = ({ item }: { item: News }) => {
+  const setNewsStore = useUnit(setNews);
 
-export const NewsItem = ({ title, publishedAt, sourceName, urlToImage }: NewsItemProps) => {
+  const onNewsPress = (item: News) => {
+    setNewsStore(item);
+    Navigation.navigate('NewsScreen', { state: item });
+  };
+
   return (
-    <Wrapper>
+    <PressableWrapper onPress={() => onNewsPress(item)}>
       <NewsImage
-        source={urlToImage ? { uri: urlToImage } : require('../../../assets/images/main.png')}
+        source={
+          item.urlToImage ? { uri: item.urlToImage } : require('../../../assets/images/main.png')
+        }
       />
-      <Title>{title}</Title>
+      <Title>{item.title}</Title>
 
       <NewsItemFooter>
-        <TextBlock>Источник: {sourceName}</TextBlock>
-        <TextBlock>Дата: {publishedAt}</TextBlock>
+        <TextBlock>Источник: {item.source.name}</TextBlock>
+        <TextBlock>Дата: {item.publishedAt.split('T')[0]}</TextBlock>
       </NewsItemFooter>
-    </Wrapper>
+    </PressableWrapper>
   );
 };

@@ -26,7 +26,7 @@ export const Row = ({
   style,
   ...props
 }: RowProps) => (
-  <RowView direction={direction} jc={jc} ai={ai} {...props}>
+  <RowView direction={direction} jc={jc} ai={ai} {...props} style={style}>
     {children}
   </RowView>
 );

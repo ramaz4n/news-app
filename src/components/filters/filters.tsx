@@ -3,8 +3,7 @@ import { APP_COLORS } from '../../shared/constants/app-colors.ts';
 import { CategoryFilterType, FILTERS } from '../../shared/constants/filters.ts';
 import { WINDOW } from '../../shared/constants/global.ts';
 import { setQueryType } from '../../shared/models/news-model.ts';
-import { $newsFilter, changeNewsFilter } from '../../shared/models/news-filter-model.ts';
-import { useUnit } from 'effector-react';
+import { changeNewsFilter } from '../../shared/models/news-filter-model.ts';
 
 const Wrapper = styled.View`
   width: ${WINDOW.width};

@@ -8,7 +8,7 @@ import { $newsList } from '../../shared/models/news-model.ts';
 import { useUnit } from 'effector-react';
 
 import { FlatList } from 'react-native';
-import { $newsFilter, setNewsFilter } from '../../shared/models/news-filter-model.ts';
+import { $newsFilter, changeNewsFilter } from '../../shared/models/news-filter-model.ts';
 import { Header } from '../../components/header/header.tsx';
 import { Filters } from '../../components/filters/filters.tsx';
 import { NewsItem } from '../../components/news-item/news-item.tsx';
@@ -39,7 +39,7 @@ export const MainScreen = () => {
 
   const getMoreNews = () => {
     if (newsFilters.page) {
-      setNewsFilter({ ...newsFilters, page: newsFilters.page + 1 });
+      changeNewsFilter({ ...newsFilters, page: newsFilters.page + 1 });
     }
   };
 
@@ -54,7 +54,7 @@ export const MainScreen = () => {
         keyExtractor={(item) => item.url}
         renderItem={({ item, index }) => <NewsItem item={item} key={index} />}
         onEndReached={() => getMoreNews()}
-        onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.3}
         ListFooterComponent={isLoading ? <AppLoader isImage={true} /> : null}
       />
     </Wrapper>

@@ -31,6 +31,7 @@ const NewsImage = styled.Image`
   width: 50%;
   height: 150px;
   border-radius: 15px;
+  object-fit: cover;
 `;
 
 const NewsItemFooter = styled.View`

@@ -14,6 +14,8 @@ export const apiRequest = async ({ ...options }: ApiRequestParams) => {
       ...options,
     });
 
+    console.blog(options);
+
     return res.data;
   } catch (_error) {
     const { response, message } = _error as AxiosError;

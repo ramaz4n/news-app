@@ -3,7 +3,8 @@ import { APP_COLORS } from '../../shared/constants/app-colors.ts';
 import { CategoryFilterType, FILTERS } from '../../shared/constants/filters.ts';
 import { WINDOW } from '../../shared/constants/global.ts';
 import { setQueryType } from '../../shared/models/news-model.ts';
-import { setNewsFilter } from '../../shared/models/news-filter-model.ts';
+import { $newsFilter, changeNewsFilter } from '../../shared/models/news-filter-model.ts';
+import { useUnit } from 'effector-react';
 
 const Wrapper = styled.View`
   width: ${WINDOW.width};
@@ -31,7 +32,7 @@ const StyledText = styled.Text`
 export const Filters = () => {
   const onFilterClick = (filter: CategoryFilterType) => {
     setQueryType(filter.queryType);
-    setNewsFilter({ country: 'ru', category: filter.name, page: 1 });
+    changeNewsFilter({ country: 'ru', category: filter.name, page: 1 });
   };
 
   return (

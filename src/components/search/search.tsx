@@ -1,12 +1,13 @@
 import styled from 'styled-components/native';
 import { APP_COLORS } from '../../shared/constants/app-colors.ts';
 import { WINDOW } from '../../shared/constants/global.ts';
-import { useUnit } from 'effector-react';
 import { useState } from 'react';
 import { Icon } from '../../shared/ui/icon/icon.tsx';
-import { $newsFilter, setNewsFilter } from '../../shared/models/news-filter-model.ts';
+import { changeNewsFilter } from '../../shared/models/news-filter-model.ts';
 import { debounce } from '../../shared/utils/debounce.ts';
 import { defaultSearchFilters } from '../../shared/constants/default-search-filters.ts';
+import { setQueryType } from '../../shared/models/news-model.ts';
+import { Keyboard } from 'react-native';
 
 const Wrapper = styled.View`
   border-radius: 20px;
@@ -28,7 +29,7 @@ const StyledTextInput = styled.TextInput`
 const StyledTouchableOpacity = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
-  background-color: ${APP_COLORS.blue};
+  background-color: ${APP_COLORS.grey};
   flex-direction: row;
   gap: 5px;
   border-radius: 15px;
@@ -43,16 +44,20 @@ const StyledText = styled.Text`
 
 export const Search = () => {
   const [inputData, setInputData] = useState<string>('');
-  const [newsFilterStore] = useUnit([$newsFilter]);
 
   const handleSearch = (text: string) => {
     setInputData(() => text);
 
-    if (text === '') debounce(() => setNewsFilter(defaultSearchFilters))();
+    if (text === '') debounce(() => changeNewsFilter(defaultSearchFilters))();
+  };
+
+  const onFocus = () => {
+    setQueryType('everything');
+    Keyboard.isVisible();
   };
 
   const onSearchClick = () => {
-    setNewsFilter({ ...newsFilterStore, q: inputData, page: 1 });
+    changeNewsFilter({ ...defaultSearchFilters, q: inputData, page: 1 });
   };
 
   return (
@@ -61,16 +66,20 @@ export const Search = () => {
         placeholder='Поиск...'
         value={inputData}
         onChangeText={handleSearch}
+        onFocus={() => onFocus()}
+        onBlur={() => Keyboard.dismiss()}
         autoCapitalize='none'
         autoCorrect={false}
       />
 
-      {inputData && (
-        <StyledTouchableOpacity onPress={() => onSearchClick()}>
-          <StyledText>Поиск</StyledText>
-          <Icon name={'search'} size={15} />
-        </StyledTouchableOpacity>
-      )}
+      <StyledTouchableOpacity
+        style={{ backgroundColor: inputData ? APP_COLORS.blue : APP_COLORS.grey }}
+        disabled={!inputData}
+        onPress={() => onSearchClick()}
+      >
+        <StyledText>Поиск</StyledText>
+        <Icon name={'search'} size={15} />
+      </StyledTouchableOpacity>
     </Wrapper>
   );
 };

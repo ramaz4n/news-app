@@ -29,8 +29,6 @@ export const useNews = () => {
       const currentNews = $newsList.getState();
       const updatedNews = params.page === 1 ? data.articles : [...currentNews, ...data.articles];
 
-      console.log(updatedNews);
-
       setNewsList(updatedNews);
     }
   }, [data]);
